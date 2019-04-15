@@ -85,9 +85,42 @@ Original Source: [Persistent Trigger Results Objects](https://twiki.cern.ch/twik
 
 ## Usage Instruction
 
-First you have to create a [VM](http://opendata.cern.ch/VM/CMS "CMS Open Data Portal") from the CMS Open Data website. 
+### Setup
 
-Then follow these steps:
+First you have to either create a [VM](http://opendata.cern.ch/VM/CMS "CMS Open Data Portal") from the CMS Open Data website or install [Docker](https://docs.docker.com/install/).
+
+* If you have installed the VM then continue to the Install instructions below. 
+* If you have installed Docker then run the following command to pull a docker image, create a container from the image, and run it:
+
+```
+$ docker run --rm --cap-add SYS_ADMIN --device /dev/fuse -it clelange/cmssw-cvmfs /bin/bash
+Unable to find image 'clelange/cmssw-cvmfs:latest' locally
+latest: Pulling from clelange/cmssw-cvmfs
+e8114d4b0d10: Already exists 
+a3eda0944a81: Already exists 
+1249ddf92fd4: Pull complete 
+Digest: sha256:ce936f78d5dd244a4ab211de39f596930427b820a52fe6a38a95fcbcee027169
+Status: Downloaded newer image for clelange/cmssw-cvmfs:latest
+::: cvmfs-config...
+::: mounting FUSE...
+CernVM-FS: running with credentials 498:497
+CernVM-FS: loading Fuse module... done
+CernVM-FS: mounted cvmfs on /cvmfs/cms.cern.ch
+CernVM-FS: running with credentials 498:497
+CernVM-FS: loading Fuse module... done
+CernVM-FS: mounted cvmfs on /cvmfs/cms-opendata-conddb.cern.ch
+::: mounting FUSE... [done]
+::: Mounting CVMFS... [done]
+::: Setting up CMS environment...
+::: Setting up CMS environment... [done]
+[12:45:50] cmsusr@e66b457e0c44 ~ $
+```
+
+Once finished, and at the command line prompt, proceed to the Install steps below. If you want to keep the container and its contents for later use then run `docker run` without the `--rm` option. 
+
+### Install
+
+To install, follow these steps:
 
 - Create a CMSSW environment: 
 
@@ -167,6 +200,7 @@ ls -l /cvmfs/
 
 You should now see the `cms-opendata-conddb.cern.ch` link in the `/cvmfs` area.
 
+### Run
 
 - Run the CMSSW executable in the background
 
